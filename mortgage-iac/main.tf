@@ -83,3 +83,12 @@ resource "aws_instance" "mortgage-plan" {
     Name = "mortgage-plan"
   }
 }
+
+module "route53" {
+  source       = "./modules/route53"
+  zone_comment = "HostedZone created by Route53 Registrar"
+  force_destroy = false
+  domain_name  = "mortgagesplan.com"
+  ttl          = 300
+  public_ip    = var.public_ip
+}
