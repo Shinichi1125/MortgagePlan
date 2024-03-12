@@ -13,93 +13,70 @@ provider "aws" {
   region  = "eu-north-1"
 }
 
-resource "aws_vpc" "mortgageplan-vpc" {
-  cidr_block       = "10.0.0.0/16"
-  instance_tenancy = "default"
-
-  tags = {
-    Name = "mortgageplan-vpc"
-  }
+module "vpc" {
+  source = "./modules/vpc"
+  cidr_block = "10.0.0.0/16"
+  name       = "mortgageplan-vpc"
 }
 
-resource "aws_security_group" "mortgageplan-sg-public" {
+module "security_group" {
+  source      = "./modules/security-group"
   name        = "mortgageplan-sg-public"
-  description = "Security group for the Angular client" 
-  vpc_id      = aws_vpc.mortgageplan-vpc.id
+  description = "Security group for the Angular client"
+  vpc_id      = module.vpc.vpc_id
 
   revoke_rules_on_delete = false
+
+  ingress_rules = [
+    {
+      from_port   = 80,
+      to_port     = 80,
+      protocol    = "tcp",
+      cidr_blocks = ["0.0.0.0/0"],
+    },
+    {
+      from_port   = 22,
+      to_port     = 22,
+      protocol    = "tcp",
+      cidr_blocks = ["0.0.0.0/0"],
+    },
+    {
+      from_port   = 443,
+      to_port     = 443,
+      protocol    = "tcp",
+      cidr_blocks = ["0.0.0.0/0"],
+    }
+  ]
 }
 
-resource "aws_subnet" "mortgageplan-public-subnet" {
-  vpc_id     = aws_vpc.mortgageplan-vpc.id
-  cidr_block = "10.0.10.0/24"
+module "public_subnet" {
+  source              = "./modules/subnet"
+  vpc_id              = module.vpc.vpc_id
+  cidr_block          = "10.0.10.0/24"
   map_public_ip_on_launch = true
-
-  tags = {
-    Name = "mortgageplan-public-subnet"
-  }
+  availability_zone   = "eu-north-1a"
+  name                = "mortgageplan-public-subnet"
 }
 
-resource "aws_internet_gateway" "mortgageplan-igw" {
-  vpc_id = aws_vpc.mortgageplan-vpc.id
-
-  tags = {
-    Name = "mortgageplan-igw"
-  }
+module "internet_gateway" {
+  source = "./modules/internet-gateway"
+  vpc_id = module.vpc.vpc_id
+  name   = "mortgageplan-igw"
 }
 
-resource "aws_route_table" "mortgageplan-public-route" {
-  vpc_id = aws_vpc.mortgageplan-vpc.id
-
-  tags = {
-    Name = "mortgageplan-public-route"
-  }
-}
-
-resource "aws_route_table_association" "mortgageplan-public-rta" {
-  subnet_id      = aws_subnet.mortgageplan-public-subnet.id
-  route_table_id = aws_route_table.mortgageplan-public-route.id
-}
-
-resource "aws_route" "mortgageplan_internet_access" {
-  route_table_id         = aws_route_table.mortgageplan-public-route.id
-  destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = aws_internet_gateway.mortgageplan-igw.id
-}
-
-resource "aws_security_group_rule" "mortgageplan_allow_web_traffic" {
-  type              = "ingress"
-  from_port         = 80
-  to_port           = 80
-  protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.mortgageplan-sg-public.id
-}
-
-resource "aws_security_group_rule" "mortgageplan_allow_ssh" {
-  type              = "ingress"
-  from_port         = 22
-  to_port           = 22
-  protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.mortgageplan-sg-public.id
-}
-
-variable "ami_id" {
-  type        = string
-  description = "The AMI ID for the EC2 instance"
-}
-
-variable "key_name" {
-  type        = string
-  description = "The Key Name for the EC2 instance"
+module "route_table" {
+  source     = "./modules/route-table"
+  vpc_id     = module.vpc.vpc_id
+  subnet_id  = module.public_subnet.subnet_id
+  igw_id     = module.internet_gateway.igw_id
+  name       = "mortgageplan-public-route"
 }
 
 resource "aws_instance" "mortgage-plan" {
   ami           = var.ami_id
   instance_type = "t3.small"
-  subnet_id               = aws_subnet.mortgageplan-public-subnet.id
-  vpc_security_group_ids  = [aws_security_group.mortgageplan-sg-public.id]
+  subnet_id      = module.public_subnet.subnet_id
+  vpc_security_group_ids = [module.security_group.security_group_id]
   key_name                = var.key_name
 
   tags = {
