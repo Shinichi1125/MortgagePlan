@@ -15,6 +15,6 @@ public class GreetingController {
 
     @GetMapping("/greeting")
     public ResponseEntity<String> getGreeting() {
-        return ResponseEntity.ok("Hello from Spring Boot! (Manual Deployment)");
+        return ResponseEntity.ok("Hello from Spring Boot! (Deployed by deploy-script.sh)");
     }
 }
