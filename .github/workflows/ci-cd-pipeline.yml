@@ -24,9 +24,17 @@ jobs:
         env:
           KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
 
+      - name: Add SSH key to ssh-agent
+        run: |
+          echo "$SSH_PRIVATE_KEY" > ssh_key
+          chmod 600 ssh_key
+          ssh-add ssh_key
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
       - name: Deploy to AWS EC2
         run: |
-          ssh -T ec2-user@${{ secrets.PUBLIC_IP }} <<EOF
+          ssh -i ssh_key -T ec2-user@${{ secrets.PUBLIC_IP }} <<EOF
           ./deploy-script.sh
           EOF
         env:
