@@ -19,6 +19,7 @@ jobs:
 
       - name: Setup Known Hosts
         run: |
+          mkdir -p ~/.ssh
           echo "${{ secrets.KNOWN_HOSTS }}" > ~/.ssh/known_hosts
         env:
           KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
