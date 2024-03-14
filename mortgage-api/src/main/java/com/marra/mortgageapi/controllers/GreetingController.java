@@ -15,6 +15,6 @@ public class GreetingController {
 
     @GetMapping("/greeting")
     public ResponseEntity<String> getGreeting() {
-        return ResponseEntity.ok("Hello from Spring Boot! (Deployed by GitHub Actions CI/CD pipeline)");
+        return ResponseEntity.ok("Hello from Spring Boot! (Deployed to main branch by GitHub Actions CI/CD pipeline)");
     }
 }
