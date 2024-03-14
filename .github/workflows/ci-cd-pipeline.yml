@@ -17,6 +17,12 @@ jobs:
         with:
           java-version: 17
 
+      - name: Setup Known Hosts
+        run: |
+          echo "${{ secrets.KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+        env:
+          KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
+
       - name: Deploy to AWS EC2
         run: |
           ssh -T ec2-user@${{ secrets.PUBLIC_IP }} <<EOF
