@@ -14,4 +14,8 @@ export class ApiService {
   getGreeting(): Observable<any> {
     return this.http.get(`${this.baseUrl}/greeting`, { responseType: 'text' });
   }
+
+  getAllUsers(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/all-users`);
+  }
 }

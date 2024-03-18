@@ -27,7 +27,7 @@ public class GreetingController {
         return ResponseEntity.ok("Hello from Spring Boot! (Deployed to main branch by GitHub Actions CI/CD pipeline)");
     }
 
-	@GetMapping("/")
+	@GetMapping("/all-users")
 	public List<Mortgage> getAllMortgages() {
 		return repository.findAll();
 	}

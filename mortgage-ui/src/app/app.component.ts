@@ -10,6 +10,7 @@ export class AppComponent implements OnInit {
   title = 'mortgage-ui';
 
   greeting = '';
+  users = '';
 
   constructor(private apiService: ApiService) {}
 
@@ -19,5 +20,17 @@ export class AppComponent implements OnInit {
     }, error => {
       console.error('Error fetching greeting:', error);
     });
+    this.loadAllUsers();
+  }
+
+  loadAllUsers(): void {
+    this.apiService.getAllUsers().subscribe(
+      data => {
+        this.users = JSON.stringify(data, null, 2); 
+      },
+      error => {
+        console.error('There was an error!', error);
+      }
+    );
   }
 }
