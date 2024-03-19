@@ -10,22 +10,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import com.marra.mortgageapi.controllers.GreetingController;
+import com.marra.mortgageapi.controllers.MortgageController;
 import com.marra.mortgageapi.model.Mortgage;
 import com.marra.mortgageapi.repos.MortgageRepository;
 
 @RestController
 @RequestMapping("/api")
 @CrossOrigin
-public class GreetingController {
+public class MortgageController {
 
 	@Autowired
     private MortgageRepository repository;
-
-    @GetMapping("/greeting")
-    public ResponseEntity<String> getGreeting() {
-        return ResponseEntity.ok("Hello from Spring Boot! (Deployed to main branch by GitHub Actions CI/CD pipeline)");
-    }
 
 	@GetMapping("/all-users")
 	public List<Mortgage> getAllMortgages() {
