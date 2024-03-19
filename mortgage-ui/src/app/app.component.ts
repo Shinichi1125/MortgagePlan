@@ -15,11 +15,6 @@ export class AppComponent implements OnInit {
   constructor(private apiService: ApiService) {}
 
   ngOnInit() {
-    this.apiService.getGreeting().subscribe(data => {
-      this.greeting = data;
-    }, error => {
-      console.error('Error fetching greeting:', error);
-    });
     this.loadAllUsers();
   }
 
