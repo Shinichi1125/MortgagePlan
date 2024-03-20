@@ -7,6 +7,7 @@ public class DecimalMortgage {
 	private float totalLoan; 
 	private float interest;
 	private int years;
+	private double monthlyPayment;
 	
 	public DecimalMortgage() {
 
@@ -50,5 +51,13 @@ public class DecimalMortgage {
 
 	public void setYears(int years) {
 		this.years = years;
+	}
+
+	public double getMonthlyPayment() {
+		return monthlyPayment;
+	}
+
+	public void setMonthlyPayment(double monthlyPayment) {
+		this.monthlyPayment = monthlyPayment;
 	}
 }
