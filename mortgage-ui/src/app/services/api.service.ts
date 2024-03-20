@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment'; 
-import Customer from '../interfaces/Customer.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +21,14 @@ export class ApiService {
 
   getMonthlyPayments(id: number) {
     return this.http.get(`${this.baseUrl}/monthly-payment/${id}`);
+  }
+
+  createCustomer(customerData: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/save-customer`, customerData, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    });
   }
 
   deleteCustomer(id: number) {
