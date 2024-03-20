@@ -13,12 +13,24 @@ export class CustomerDataListComponent implements OnInit {
   constructor(private apiService: ApiService) {}
 
   ngOnInit() {
+    this.loadAllCustomers();
+  }
+
+  loadAllCustomers() {
     this.apiService.retrieveAllCustomerData().subscribe(data => {
       this.allCustomers = data;
     });
   }
 
   deleteCustomer(id: number) {
-    return this.apiService.deleteCustomer(id);
+    this.apiService.deleteCustomer(id).subscribe({
+      next: (response) => {
+        this.loadAllCustomers();
+      },
+      error: (error) => {
+        console.error('Delete failed: ', error);
+      }
+    });
   }
+
 }

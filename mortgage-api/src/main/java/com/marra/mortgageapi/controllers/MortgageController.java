@@ -8,15 +8,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import com.marra.mortgageapi.controllers.MortgageController;
 import com.marra.mortgageapi.helpers.Helper;
@@ -28,6 +30,7 @@ import com.marra.mortgageapi.repos.MortgageRepository;
 @RequestMapping("/api")
 @CrossOrigin
 public class MortgageController {
+	private static final Logger LOGGER = LoggerFactory.getLogger(MortgageController.class);
 
 	@Autowired
     private MortgageRepository repository;
@@ -126,5 +129,10 @@ public class MortgageController {
 		}else {
 			return new ResponseEntity<>(repository.save(customerData), HttpStatus.OK);
 		}
+	}
+
+	@DeleteMapping("/delete-customer/{id}")
+	public void deleteCustomer(@PathVariable("id") int id) {
+		repository.deleteById(id);
 	}
 }
