@@ -4,7 +4,8 @@ import Customer from '../interfaces/Customer.interface';
 
 @Component({
   selector: 'app-customer-data-list',
-  templateUrl: './customer-data-list.component.html'
+  templateUrl: './customer-data-list.component.html',
+  styleUrls: ['./customer-data-list.component.css']
 })
 
 export class CustomerDataListComponent implements OnInit {

@@ -2,4 +2,32 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+/* Center align table cell contents */
+table {
+    width: 100%;
+    text-align: center;
+}
   
+/* Style the table headers */
+th {
+    background-color: #f2f2f2; /* Light gray background for the header */
+}
+  
+/* Alternate row background colors */
+tr:nth-child(even) {
+    background-color: #B2FFFF; /* Light blue for even rows */
+}
+  
+tr:nth-child(odd) {
+    background-color: #ffffff; /* White for odd rows */
+}
+
+tr {
+    border-bottom: 1px solid #ddd; /* Adds a line between rows for clearer separation */
+}
+
+td, th {
+    padding: 6px; /* Increase padding as needed for a more spacious look */
+    vertical-align: middle; /* Center content vertically */
+}
