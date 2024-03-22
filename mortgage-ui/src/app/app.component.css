@@ -217,48 +217,6 @@ a:hover {
     box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
 }
 
-footer {
-    position: fixed;
-    width: 100%; 
-    display: flex;
-    bottom: 0;
-    text-align: center;
-    justify-content: center;
-    padding: 10px 0;
-    line-height: 20px;
-    box-shadow: 0 -2px 4px rgba(0,0,0,0.1); 
-}
-
-footer a {
-    display: flex;
-    align-items: center;
-}
-
-.github-star-badge {
-    color: #24292e;
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    padding: 3px 10px;
-    border: 1px solid rgba(27,31,35,.2);
-    border-radius: 3px;
-    background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);
-    margin-left: 4px;
-    font-weight: 600;
-}
-
-.github-star-badge:hover {
-    background-image: linear-gradient(-180deg,#f0f3f6,#e6ebf1 90%);
-    border-color: rgba(27,31,35,.35);
-    background-position: -.5em;
-}
-
-.github-star-badge .material-icons {
-    height: 16px;
-    width: 16px;
-    margin-right: 4px;
-}
-
 svg#clouds {
     position: fixed;
     bottom: -160px;

@@ -4,59 +4,63 @@
 <div class="container">
     <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
-        <label for="customer">Customer Name</label>
+        <label for="customer">Customer Name: </label>
         <input type="text" class="form-control" id="customer" formControlName="customer">
-        <div *ngIf="customerForm.get('customer')?.errors?.['required']" class="alert alert-danger">
+        <div *ngIf="customerForm.get('customer')?.touched && customerForm.get('customer')?.errors?.['required']" class="alert alert-danger error-message">
           Customer name is required.
         </div>
       </div>
   
       <div class="form-group">
-        <label for="totalLoanEuro">Total Loan (Euro)</label>
+        <label for="totalLoanEuro">Total Loan (Euro): </label>
         <input type="number" class="form-control" id="totalLoanEuro" formControlName="totalLoanEuro">
-        <div *ngIf="customerForm.get('totalLoanEuro')?.errors?.['required']" class="alert alert-danger">
+        <div *ngIf="customerForm.get('totalLoanEuro')?.touched && customerForm.get('totalLoanEuro')?.errors?.['required']" class="alert alert-danger error-message">
           Total Loan (Euro) is required.
         </div>
-        <div *ngIf="customerForm.get('totalLoanEuro')?.errors?.['min'] || customerForm.get('totalLoanEuro')?.errors?.['max']" class="alert alert-danger">
+        <div *ngIf="customerForm.get('totalLoanEuro')?.errors?.['min'] || customerForm.get('totalLoanEuro')?.errors?.['max']" class="alert alert-danger error-message">
           Total Loan (Euro) must be between 0 and 10,000,000.
         </div>
       </div>
   
       <div class="form-group">
-        <label for="totalLoanCent">Total Loan (Cents)</label>
+        <label for="totalLoanCent">Total Loan (Cents): </label>
         <input type="number" class="form-control" id="totalLoanCent" formControlName="totalLoanCent">
-        <div *ngIf="customerForm.get('totalLoanCent')?.errors?.['required']" class="alert alert-danger">
+        <div *ngIf="customerForm.get('totalLoanCent')?.touched && customerForm.get('totalLoanCent')?.errors?.['required']" class="alert alert-danger error-message">
           Total Loan (Cents) is required.
         </div>
-        <div *ngIf="customerForm.get('totalLoanCent')?.errors?.['min'] || customerForm.get('totalLoanCent')?.errors?.['max']" class="alert alert-danger">
+        <div *ngIf="customerForm.get('totalLoanCent')?.errors?.['min'] || customerForm.get('totalLoanCent')?.errors?.['max']" class="alert alert-danger error-message">
           Total Loan (Cents) must be between 0 and 99.
         </div>
       </div>
   
       <div class="form-group">
-        <label for="interest">Interest (%)</label>
+        <label for="interest">Interest (%): </label>
         <input type="number" class="form-control" id="interest" formControlName="interest">
-        <div *ngIf="customerForm.get('interest')?.errors?.['required']" class="alert alert-danger">
+        <div *ngIf="customerForm.get('interest')?.touched && customerForm.get('interest')?.errors?.['required']" class="alert alert-danger error-message">
           Interest is required.
         </div>
-        <div *ngIf="customerForm.get('interest')?.errors?.['min'] || customerForm.get('interest')?.errors?.['max']" class="alert alert-danger">
+        <div *ngIf="customerForm.get('interest')?.errors?.['min'] || customerForm.get('interest')?.errors?.['max']" class="alert alert-danger error-message">
           Interest must be between 0 and 100%.
         </div>
       </div>
   
       <div class="form-group">
-        <label for="years">Years</label>
+        <label for="years">Years: </label>
         <input type="number" class="form-control" id="years" formControlName="years">
-        <div *ngIf="customerForm.get('years')?.errors?.['required']" class="alert alert-danger">
+        <div *ngIf="customerForm.get('years')?.touched && customerForm.get('years')?.errors?.['required']" class="alert alert-danger error-message">
           Years is required.
         </div>
-        <div *ngIf="customerForm.get('years')?.errors?.['min'] || customerForm.get('years')?.errors?.['max']" class="alert alert-danger">
+        <div *ngIf="customerForm.get('years')?.errors?.['min'] || customerForm.get('years')?.errors?.['max']" class="alert alert-danger error-message">
           Years must be between 0 and 100.
         </div>
       </div>
   
-      <button type="submit" class="btn btn-primary" [disabled]="!customerForm.valid">Save</button>
-      <button type="button" class="btn btn-secondary" (click)="cancelCreate()">Cancel</button>
+      <br>
+      <div class="button-container">
+        <button type="submit" class="btn btn-primary" [disabled]="!customerForm.valid">Save</button>
+        &nbsp;
+        <button type="button" class="btn btn-secondary" (click)="cancelCreate()">Cancel</button>
+      </div>
     </form>
 </div>
   

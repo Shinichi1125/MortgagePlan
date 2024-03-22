@@ -2,3 +2,7 @@
     text-align: center;
     margin-bottom: 15px; /* Adds some space between the button and the table */
 }  
+
+.error-message {
+    color: red;
+}

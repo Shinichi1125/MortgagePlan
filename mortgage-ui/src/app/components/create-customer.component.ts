@@ -24,7 +24,7 @@ export class CreateCustomerComponent implements OnInit {
       totalLoanEuro: ['', [Validators.required, Validators.min(0), Validators.max(10000000)]],
       totalLoanCent: ['', [Validators.required, Validators.min(0), Validators.max(99)]],
       interest: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
-      years: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
+      years: ['', [Validators.required, Validators.min(1), Validators.max(100)]],
     });
   }
 
