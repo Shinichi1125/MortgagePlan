@@ -15,8 +15,8 @@
     </thead>
     <tbody>
       <tr *ngFor="let customer of allCustomers">
-        <td>{{ customer.id }}</td>
-        <td>{{ customer.customer }}</td>
+        <td><a [routerLink]="['/customer/update', customer.id]">{{ customer.id }}</a></td>
+        <td><a [routerLink]="['/customer/update', customer.id]">{{ customer.customer }}</a></td>
         <td>{{ customer.totalLoan }}</td>
         <td>{{ customer.interest * 100 }}%</td>
         <td>{{ customer.years }}</td>

@@ -4,8 +4,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -13,6 +15,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,9 +40,11 @@ public class MortgageController {
 
 	Helper helper = new Helper();
 
-	@GetMapping("/all-users")
-	public List<Mortgage> getAllMortgages() {
-		return repository.findAll();
+	@RequestMapping(value = "/mortgage/{id}", method = RequestMethod.GET)
+	public DecimalMortgage getDecimalMortgage(@PathVariable("id") int id) {
+		Mortgage mortgage = repository.findById(id).get();
+		DecimalMortgage decimalMortgage = convertToDecimalMortgage(mortgage);
+		return decimalMortgage;
 	}
 
 	DecimalMortgage convertToDecimalMortgage(Mortgage mortgage) {
@@ -130,6 +135,28 @@ public class MortgageController {
 			return new ResponseEntity<>(repository.save(customerData), HttpStatus.OK);
 		}
 	}
+
+	@PutMapping("/update-mortgage/{id}")
+    public ResponseEntity<Mortgage> updateCustomer(@PathVariable("id") int id, @RequestBody Mortgage mortgageDetails) {
+		Mortgage mortgage = null;
+		Optional<Mortgage> optMortgage = Optional.ofNullable(mortgage);
+		optMortgage = repository.findById(id);
+
+		if(!optMortgage.isPresent()) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer Not Found");
+		}
+
+		mortgage = optMortgage.get();
+
+        mortgage.setCustomer(mortgageDetails.getCustomer());
+        mortgage.setTotalLoanEuro(mortgageDetails.getTotalLoanEuro());
+        mortgage.setTotalLoanCent(mortgageDetails.getTotalLoanCent());
+        mortgage.setInterest(mortgageDetails.getInterest());
+        mortgage.setYears(mortgageDetails.getYears());
+
+        final Mortgage updatedMortgage = repository.save(mortgage);
+        return ResponseEntity.ok(updatedMortgage);
+    }
 
 	@DeleteMapping("/delete-customer/{id}")
 	public void deleteCustomer(@PathVariable("id") int id) {

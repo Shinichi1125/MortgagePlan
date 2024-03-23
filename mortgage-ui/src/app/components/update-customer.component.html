@@ -1,0 +1,58 @@
+<div class="button-container">
+    <button routerLink="/" class="btn btn-primary">&#60;&#60; BACK TO TOP</button>
+</div>
+<div class="container">
+    <h2>Update Customer</h2>
+    <form [formGroup]="updateCustomerForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="customer">Customer Name</label>
+        <input type="text" class="form-control" id="customer" formControlName="customer" placeholder="Enter customer name">
+        <div *ngIf="updateCustomerForm.get('customer')?.invalid && (updateCustomerForm.get('customer')?.dirty || updateCustomerForm.get('customer')?.touched)" class="alert alert-danger">
+          <div *ngIf="updateCustomerForm.get('customer')?.errors?.['required']">Customer name is required.</div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="totalLoanEuro">Total Loan (Euro)</label>
+        <input type="number" class="form-control" id="totalLoanEuro" formControlName="totalLoanEuro" placeholder="Enter total loan in euros">
+        <div *ngIf="updateCustomerForm.get('totalLoanEuro')?.invalid && (updateCustomerForm.get('totalLoanEuro')?.dirty || updateCustomerForm.get('totalLoanEuro')?.touched)" class="alert alert-danger">
+          <div *ngIf="updateCustomerForm.get('totalLoanEuro')?.errors?.['required']">Total Loan (Euro) is required.</div>
+          <div *ngIf="updateCustomerForm.get('totalLoanEuro')?.errors?.['min']">The value cannot be negative.</div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="totalLoanCent">Total Loan (Cents)</label>
+        <input type="number" class="form-control" id="totalLoanCent" formControlName="totalLoanCent" placeholder="Enter total loan in cents">
+        <div *ngIf="updateCustomerForm.get('totalLoanCent')?.invalid && (updateCustomerForm.get('totalLoanCent')?.dirty || updateCustomerForm.get('totalLoanCent')?.touched)" class="alert alert-danger">
+          <div *ngIf="updateCustomerForm.get('totalLoanCent')?.errors?.['required']">Total Loan (Cents) is required.</div>
+          <div *ngIf="updateCustomerForm.get('totalLoanCent')?.errors?.['min']">The value cannot be negative.</div>
+          <div *ngIf="updateCustomerForm.get('totalLoanCent')?.errors?.['max']">The value cannot be greater than 99.</div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="interest">Interest (%)</label>
+        <input type="number" class="form-control" id="interest" formControlName="interest" placeholder="Enter interest rate">
+        <div *ngIf="updateCustomerForm.get('interest')?.invalid && (updateCustomerForm.get('interest')?.dirty || updateCustomerForm.get('interest')?.touched)" class="alert alert-danger">
+          <div *ngIf="updateCustomerForm.get('interest')?.errors?.['required']">Interest rate is required.</div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="years">Years</label>
+        <input type="number" class="form-control" id="years" formControlName="years" placeholder="Enter duration in years">
+        <div *ngIf="updateCustomerForm.get('years')?.invalid && (updateCustomerForm.get('years')?.dirty || updateCustomerForm.get('years')?.touched)" class="alert alert-danger">
+          <div *ngIf="updateCustomerForm.get('years')?.errors?.['required']">Number of years is required.</div>
+        </div>
+      </div>
+  
+      <br>
+      <div class="button-container">
+        <button type="submit" class="btn btn-success" [disabled]="!updateCustomerForm.valid">Update</button>
+        &nbsp;
+        <button type="button" class="btn btn-secondary" (click)="cancelUpdate()">Cancel</button>
+      </div>
+    </form>
+</div>
+  

@@ -11,20 +11,24 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  getAllUsers(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/all-users`);
-  }
-
   retrieveAllCustomerData(): Observable<any> {
     return this.http.get(`${this.baseUrl}/all-decimal-mortgages`);
   }
 
-  getMonthlyPayments(id: number) {
-    return this.http.get(`${this.baseUrl}/monthly-payment/${id}`);
+  getIndividualCustomerData(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/mortgage/${id}`);
   }
 
   createCustomer(customerData: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/save-customer`, customerData, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    });
+  }
+
+  updateCustomer(customerData: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/update-mortgage/${customerData.id}`, customerData, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),

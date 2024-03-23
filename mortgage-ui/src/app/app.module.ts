@@ -6,12 +6,14 @@ import { CustomerDataListComponent } from './components/customer-data-list.compo
 import { AppRoutingModule } from './app-routing.module';
 import { CreateCustomerComponent } from './components/create-customer.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UpdateCustomerComponent } from './components/update-customer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomerDataListComponent,
-    CreateCustomerComponent
+    CreateCustomerComponent,
+    UpdateCustomerComponent
   ],
   imports: [
     BrowserModule,
