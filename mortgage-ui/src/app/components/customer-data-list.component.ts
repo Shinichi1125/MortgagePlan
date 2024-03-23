@@ -24,14 +24,17 @@ export class CustomerDataListComponent implements OnInit {
   }
 
   deleteCustomer(id: number) {
-    this.apiService.deleteCustomer(id).subscribe({
-      next: (response) => {
-        this.loadAllCustomers();
-      },
-      error: (error) => {
-        console.error('Delete failed: ', error);
-      }
-    });
+    const confirmation = window.confirm("Are you really sure you want to delete this user?");
+    if (confirmation) {
+      this.apiService.deleteCustomer(id).subscribe({
+        next: (response) => {
+          this.loadAllCustomers();
+        },
+        error: (error) => {
+          console.error('Delete failed: ', error);
+        }
+      });
+    }
   }
 
 }
