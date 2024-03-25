@@ -1,7 +1,8 @@
 <div class="button-container">
     <button routerLink="/" class="btn btn-primary">&#60;&#60; BACK TO TOP</button>
 </div>
-<div class="container">
+<div class="table-responsive">
+  <div class="container">
     <h2>Update Customer</h2>
     <form [formGroup]="updateCustomerForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
@@ -59,5 +60,7 @@
         <button type="button" class="btn btn-secondary" (click)="cancelUpdate()">Cancel</button>
       </div>
     </form>
+  </div>
 </div>
+
   

@@ -2,3 +2,14 @@
     text-align: center;
     margin-bottom: 15px; /* Adds some space between the button and the table */
 }
+
+/* Adjustments for small devices */
+@media (max-width: 600px) {
+    table {
+      font-size: 10px;
+    }
+
+    th, td {
+      padding: 3px; /* Smaller padding */
+    }
+}
