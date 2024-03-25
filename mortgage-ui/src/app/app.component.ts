@@ -7,5 +7,5 @@ import { ApiService } from './services/api.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Mortgage App';
+  title = 'Mortgage Plan App';
 }

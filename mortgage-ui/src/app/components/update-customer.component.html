@@ -18,6 +18,7 @@
         <div *ngIf="updateCustomerForm.get('totalLoanEuro')?.invalid && (updateCustomerForm.get('totalLoanEuro')?.dirty || updateCustomerForm.get('totalLoanEuro')?.touched)" class="alert alert-danger">
           <div *ngIf="updateCustomerForm.get('totalLoanEuro')?.errors?.['required']">Total Loan (Euro) is required.</div>
           <div *ngIf="updateCustomerForm.get('totalLoanEuro')?.errors?.['min']">The value cannot be negative.</div>
+          <div *ngIf="updateCustomerForm.get('totalLoanEuro')?.errors?.['max']">The value cannot be greater than 10000000.</div>
         </div>
       </div>
   
@@ -36,6 +37,8 @@
         <input type="number" class="form-control" id="interest" formControlName="interest" placeholder="Enter interest rate">
         <div *ngIf="updateCustomerForm.get('interest')?.invalid && (updateCustomerForm.get('interest')?.dirty || updateCustomerForm.get('interest')?.touched)" class="alert alert-danger">
           <div *ngIf="updateCustomerForm.get('interest')?.errors?.['required']">Interest rate is required.</div>
+          <div *ngIf="updateCustomerForm.get('interest')?.errors?.['min']">Interest rate cannot be negative.</div>
+          <div *ngIf="updateCustomerForm.get('interest')?.errors?.['max']">Interest rate cannot be more than 100.</div>
         </div>
       </div>
   
@@ -44,6 +47,8 @@
         <input type="number" class="form-control" id="years" formControlName="years" placeholder="Enter duration in years">
         <div *ngIf="updateCustomerForm.get('years')?.invalid && (updateCustomerForm.get('years')?.dirty || updateCustomerForm.get('years')?.touched)" class="alert alert-danger">
           <div *ngIf="updateCustomerForm.get('years')?.errors?.['required']">Number of years is required.</div>
+          <div *ngIf="updateCustomerForm.get('years')?.errors?.['min']">Valid number of years is 1-100.</div>
+          <div *ngIf="updateCustomerForm.get('years')?.errors?.['max']">Valid number of years is 1-100</div>
         </div>
       </div>
   
