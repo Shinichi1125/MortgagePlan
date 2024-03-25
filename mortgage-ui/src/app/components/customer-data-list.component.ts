@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import Customer from '../interfaces/Customer.interface';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-customer-data-list',
@@ -9,12 +10,19 @@ import Customer from '../interfaces/Customer.interface';
 })
 
 export class CustomerDataListComponent implements OnInit {
+  create_new_customer: string = "Create New Customer";
   allCustomers: Customer[] = [];
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private translate: TranslateService) {
+    translate.setDefaultLang('en');
+  }
 
   ngOnInit() {
     this.loadAllCustomers();
+  }
+
+  switchLanguage(language: string) {
+    this.translate.use(language);
   }
 
   loadAllCustomers() {
@@ -24,17 +32,18 @@ export class CustomerDataListComponent implements OnInit {
   }
 
   deleteCustomer(id: number) {
-    const confirmation = window.confirm("Are you really sure you want to delete this user?");
-    if (confirmation) {
-      this.apiService.deleteCustomer(id).subscribe({
-        next: (response) => {
-          this.loadAllCustomers();
-        },
-        error: (error) => {
-          console.error('Delete failed: ', error);
-        }
-      });
-    }
+    this.translate.get('delete_confirmation_prompt').subscribe((text: string) => {
+      const confirmation = window.confirm(text);
+      if (confirmation) {
+        this.apiService.deleteCustomer(id).subscribe({
+          next: (response) => {
+            this.loadAllCustomers();
+          },
+          error: (error) => {
+            console.error('Delete failed: ', error);
+          }
+        });
+      }
+    })
   }
-
 }

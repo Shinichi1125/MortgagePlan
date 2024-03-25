@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiService } from './services/api.service'; 
+import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core'; 
 
 @Component({
   selector: 'app-root',
@@ -8,4 +8,14 @@ import { ApiService } from './services/api.service';
 })
 export class AppComponent {
   title = 'Mortgage Plan App';
+  welcome = 'Welcome';
+  language = 'Language';
+  
+  constructor(private translate: TranslateService) {
+    translate.setDefaultLang('en');
+  }
+
+  switchLanguage(language: string) {
+    this.translate.use(language);
+  }
 }

@@ -1,63 +1,66 @@
 <div class="button-container">
-    <button routerLink="/" class="btn btn-primary">&#60;&#60; BACK TO TOP</button>
+    <button routerLink="/" class="btn btn-primary">&#60;&#60; {{ 'back_to_top' | translate  }}</button>
 </div>
 <div class="table-responsive">
   <div class="container">
-    <h2>Update Customer</h2>
     <form [formGroup]="updateCustomerForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
-        <label for="customer">Customer Name</label>
-        <input type="text" class="form-control" id="customer" formControlName="customer" placeholder="Enter customer name">
+        <label for="customer">{{ 'customer_name' | translate }}</label>
+        <input type="text" class="form-control" id="customer" formControlName="customer">
         <div *ngIf="updateCustomerForm.get('customer')?.invalid && (updateCustomerForm.get('customer')?.dirty || updateCustomerForm.get('customer')?.touched)" class="alert alert-danger">
-          <div *ngIf="updateCustomerForm.get('customer')?.errors?.['required']">Customer name is required.</div>
+          <div *ngIf="updateCustomerForm.get('customer')?.errors?.['required']">{{ 'customer_name_required' | translate  }}</div>
         </div>
       </div>
   
       <div class="form-group">
-        <label for="totalLoanEuro">Total Loan (Euro)</label>
-        <input type="number" class="form-control" id="totalLoanEuro" formControlName="totalLoanEuro" placeholder="Enter total loan in euros">
+        <label for="totalLoanEuro">{{ 'total_loan_euro' | translate }}</label>
+        <input type="number" class="form-control" id="totalLoanEuro" formControlName="totalLoanEuro">
         <div *ngIf="updateCustomerForm.get('totalLoanEuro')?.invalid && (updateCustomerForm.get('totalLoanEuro')?.dirty || updateCustomerForm.get('totalLoanEuro')?.touched)" class="alert alert-danger">
-          <div *ngIf="updateCustomerForm.get('totalLoanEuro')?.errors?.['required']">Total Loan (Euro) is required.</div>
-          <div *ngIf="updateCustomerForm.get('totalLoanEuro')?.errors?.['min']">The value cannot be negative.</div>
-          <div *ngIf="updateCustomerForm.get('totalLoanEuro')?.errors?.['max']">The value cannot be greater than 10000000.</div>
+          <div *ngIf="updateCustomerForm.get('totalLoanEuro')?.errors?.['required']">{{ 'total_loan_euro_required' | translate  }}</div>
+          <div *ngIf="updateCustomerForm.get('totalLoanEuro')?.errors?.['min'] || updateCustomerForm.get('totalLoanEuro')?.errors?.['max']" class="error-message">
+            {{ 'total_loan_euro_valid_range' | translate  }}
+          </div>
         </div>
       </div>
   
       <div class="form-group">
-        <label for="totalLoanCent">Total Loan (Cents)</label>
-        <input type="number" class="form-control" id="totalLoanCent" formControlName="totalLoanCent" placeholder="Enter total loan in cents">
+        <label for="totalLoanCent">{{ 'total_loan_cents' | translate }}</label>
+        <input type="number" class="form-control" id="totalLoanCent" formControlName="totalLoanCent">
         <div *ngIf="updateCustomerForm.get('totalLoanCent')?.invalid && (updateCustomerForm.get('totalLoanCent')?.dirty || updateCustomerForm.get('totalLoanCent')?.touched)" class="alert alert-danger">
-          <div *ngIf="updateCustomerForm.get('totalLoanCent')?.errors?.['required']">Total Loan (Cents) is required.</div>
-          <div *ngIf="updateCustomerForm.get('totalLoanCent')?.errors?.['min']">The value cannot be negative.</div>
-          <div *ngIf="updateCustomerForm.get('totalLoanCent')?.errors?.['max']">The value cannot be greater than 99.</div>
+          <div *ngIf="updateCustomerForm.get('totalLoanCent')?.errors?.['required']">{{ 'total_loan_cents_required' | translate  }}</div>
+          <div *ngIf="updateCustomerForm.get('totalLoanCent')?.errors?.['min'] || updateCustomerForm.get('totalLoanCent')?.errors?.['max']" class="error-message">
+            {{ 'total_loan_cents_valid_range' | translate  }}
+          </div>
         </div>
       </div>
   
       <div class="form-group">
-        <label for="interest">Interest (%)</label>
-        <input type="number" class="form-control" id="interest" formControlName="interest" placeholder="Enter interest rate">
+        <label for="interest">{{ 'interest' | translate }} (%)</label>
+        <input type="number" class="form-control" id="interest" formControlName="interest">
         <div *ngIf="updateCustomerForm.get('interest')?.invalid && (updateCustomerForm.get('interest')?.dirty || updateCustomerForm.get('interest')?.touched)" class="alert alert-danger">
-          <div *ngIf="updateCustomerForm.get('interest')?.errors?.['required']">Interest rate is required.</div>
-          <div *ngIf="updateCustomerForm.get('interest')?.errors?.['min']">Interest rate cannot be negative.</div>
-          <div *ngIf="updateCustomerForm.get('interest')?.errors?.['max']">Interest rate cannot be more than 100.</div>
+          <div *ngIf="updateCustomerForm.get('interest')?.errors?.['required']">{{ 'interest_required' | translate  }}</div>
+          <div *ngIf="updateCustomerForm.get('interest')?.errors?.['min'] || updateCustomerForm.get('interest')?.errors?.['max']" class="error-message">
+            {{ 'interest_valid_range' | translate  }}
+          </div>
         </div>
       </div>
   
       <div class="form-group">
-        <label for="years">Years</label>
-        <input type="number" class="form-control" id="years" formControlName="years" placeholder="Enter duration in years">
+        <label for="years">{{ 'years' | translate }}</label>
+        <input type="number" class="form-control" id="years" formControlName="years">
         <div *ngIf="updateCustomerForm.get('years')?.invalid && (updateCustomerForm.get('years')?.dirty || updateCustomerForm.get('years')?.touched)" class="alert alert-danger">
-          <div *ngIf="updateCustomerForm.get('years')?.errors?.['required']">Number of years is required.</div>
-          <div *ngIf="updateCustomerForm.get('years')?.errors?.['min']">Valid number of years is 1-100.</div>
-          <div *ngIf="updateCustomerForm.get('years')?.errors?.['max']">Valid number of years is 1-100</div>
+          <div *ngIf="updateCustomerForm.get('years')?.errors?.['required']">{{ 'years_required' | translate  }}</div>
+          <div *ngIf="updateCustomerForm.get('years')?.errors?.['min'] || updateCustomerForm.get('years')?.errors?.['max']" class="error-message">
+            {{ 'years_valid_range' | translate  }}
+          </div>
         </div>
       </div>
   
       <br>
       <div class="button-container">
-        <button type="submit" class="btn btn-success" [disabled]="!updateCustomerForm.valid">Update</button>
+        <button type="submit" class="btn btn-success" [disabled]="!updateCustomerForm.valid">{{ 'update' | translate }}</button>
         &nbsp;
-        <button type="button" class="btn btn-secondary" (click)="cancelUpdate()">Cancel</button>
+        <button type="button" class="btn btn-secondary" (click)="cancelUpdate()">{{ 'cancel' | translate }}</button>
       </div>
     </form>
   </div>
