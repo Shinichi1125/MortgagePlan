@@ -36,3 +36,14 @@ td, th {
     padding: 6px; /* Increase padding as needed for a more spacious look */
     vertical-align: middle; /* Center content vertically */
 }
+
+/* Adjustments for small devices */
+@media (max-width: 600px) {
+    table {
+      font-size: 10px;
+    }
+
+    th, td {
+      padding: 3px; /* Smaller padding */
+    }
+}
