@@ -53,7 +53,7 @@ export class UpdateCustomerComponent implements OnInit {
           customer: data.customer,
           totalLoanEuro: +totalLoan[0],
           totalLoanCent: totalLoan[1] == undefined ? 0 : +totalLoan[1],
-          interest: (data.interest*100),
+          interest: data.interest,
           years: data.years
         });
       },

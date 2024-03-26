@@ -53,7 +53,7 @@ public class MortgageController {
 		decimalMortgage.setCustomer(mortgage.getCustomer());
 		float totalLoanCent = ((float)mortgage.getTotalLoanCent()) / 100;
 		decimalMortgage.setTotalLoan(((float)mortgage.getTotalLoanEuro()) + totalLoanCent);
-		float interest = (mortgage.getInterest()) / 100;
+		float interest = (mortgage.getInterest());
 		decimalMortgage.setInterest(interest);
 		decimalMortgage.setYears(mortgage.getYears());
 		double monthlyPayment = getMonthlyPayment(mortgage);
@@ -151,7 +151,11 @@ public class MortgageController {
         mortgage.setCustomer(mortgageDetails.getCustomer());
         mortgage.setTotalLoanEuro(mortgageDetails.getTotalLoanEuro());
         mortgage.setTotalLoanCent(mortgageDetails.getTotalLoanCent());
-        mortgage.setInterest(mortgageDetails.getInterest());
+		
+		BigDecimal bd = new BigDecimal(mortgageDetails.getInterest()).setScale(2, RoundingMode.HALF_UP);
+		double twoDecimalPlaceInterest = bd.doubleValue();
+		mortgage.setInterest((float)twoDecimalPlaceInterest);
+
         mortgage.setYears(mortgageDetails.getYears());
 
         final Mortgage updatedMortgage = repository.save(mortgage);

@@ -19,7 +19,7 @@
         <td><a [routerLink]="['/customer/update', customer.id]">{{ customer.id }}</a></td>
         <td><a [routerLink]="['/customer/update', customer.id]">{{ customer.customer }}</a></td>
         <td>{{ customer.totalLoan }}</td>
-        <td>{{ customer.interest * 100 }}%</td>
+        <td>{{ customer.interest }}%</td>
         <td>{{ customer.years }}</td>
         <td>€{{ customer.monthlyPayment }}</td>
         <td><button (click)="deleteCustomer(customer.id)">{{ 'delete' | translate  }}</button></td>
